@@ -1,8 +1,8 @@
 <?php
 
-use app\Controllers\MainPageController;
-use app\Controllers\DemoController;
-use app\Controllers\TemplateEngineDemoController;
+use App\Controllers\MainPageController;
+use App\Controllers\DemoController;
+use App\Controllers\TemplateEngineDemoController;
 
 return $routes = [
     '/' => [

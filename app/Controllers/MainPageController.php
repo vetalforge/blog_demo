@@ -1,16 +1,16 @@
 <?php
 
-namespace app\Controllers;
+namespace App\Controllers;
 
-use app\Http\{Request, Session};
-use app\Models\User;
+use App\Http\{Request, Session};
+use App\Models\User;
 use Smarty\Smarty;
 
 class MainPageController extends Controller
 {
     public function __construct(
-        private Request $request,
-        private Session $session,
+        Request $request,
+        Session $session,
         private User $user,
         private Smarty $templateEngine
     ) {
@@ -23,5 +23,7 @@ class MainPageController extends Controller
         $this->templateEngine->assign('pageTitle', 'Home');
 
         $this->templateEngine->display('home.tpl');
+
+        $this->user->all();
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace app\Container;
+namespace App\Container;
 
 use Psr\Container\ContainerInterface;
-use app\Container\Exceptions\NotFoundException;
+use App\Container\Exceptions\NotFoundException;
 
 final class Container implements ContainerInterface
 {

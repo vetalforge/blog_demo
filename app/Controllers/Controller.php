@@ -1,8 +1,8 @@
 <?php
 
-namespace app\Controllers;
+namespace App\Controllers;
 
-use app\Http\{Request, Session};
+use App\Http\{Request, Session};
 
 abstract class Controller
 {

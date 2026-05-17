@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Container\Exceptions;
+namespace App\Container\Exceptions;
 
 use LogicException;
 use Psr\Container\NotFoundExceptionInterface;

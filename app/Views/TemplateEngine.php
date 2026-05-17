@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Views;
+namespace App\Views;
 
 class TemplateEngine
 {

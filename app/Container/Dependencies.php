@@ -1,15 +1,13 @@
 <?php
 
-use app\Http\Request;
-use app\Http\Session;
-use app\Controllers\MainPageController;
-use app\Controllers\DemoController;
-use app\Controllers\TemplateEngineDemoController;
-use app\Http\Router;
-use app\Models\PDOAdapter;
-use app\Models\PDOConnection;
-use app\Views\TemplateEngine;
-use app\Models\User;
+use App\Http\Request;
+use App\Http\Session;
+use App\Controllers\MainPageController;
+use App\Http\Router;
+use App\Models\PDOAdapter;
+use App\Models\PDOConnection;
+use App\Views\TemplateEngine;
+use App\Models\User;
 use Smarty\Smarty;
 
 return [

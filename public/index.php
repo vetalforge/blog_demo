@@ -5,12 +5,12 @@ error_reporting(E_ALL);
 require_once __DIR__ . '/../config/app.php';
 require_once APPLICATION . '/vendor/autoload.php';
 
-use \app\Container\Container;
+use App\Container\Container;
 
 $container = Container::instance(require_once APPLICATION . '/app/Container/Dependencies.php');
 
-$request = $container->get(\app\Http\Request::class);
-$router = $container->get(\app\Http\Router::class);
+$request = $container->get(App\Http\Request::class);
+$router = $container->get(App\Http\Router::class);
 
 $actionData = $router->getActionData($request->getUri());
 
