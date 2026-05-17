@@ -1,0 +1,16 @@
+{
+    "name": "vetalforge/blog-sample",
+    "description": "Blog sample",
+    "type": "project",
+    "require": {
+        "php": "^8.0",
+        "ext-pdo": "*",
+        "psr/container": "^2.0",
+        "smarty/smarty": "^5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    }
+}
