@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Core\Database\QueryBuilder;
+
 abstract class Model
 {
     protected \PDO $pdo;

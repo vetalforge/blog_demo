@@ -1,14 +1,14 @@
 <?php
 
-use App\Http\Request;
-use App\Http\Session;
 use App\Controllers\MainPageController;
+use App\Core\Database\QueryBuilder;
+use App\Http\Request;
 use App\Http\Router;
+use App\Http\Session;
 use App\Models\PDOConnection;
-use App\Views\TemplateEngine;
-use App\Models\QueryBuilder;
-use Smarty\Smarty;
 use App\Services\HomePageService;
+use App\Views\TemplateEngine;
+use Smarty\Smarty;
 
 return [
     Router::class => function ($container) {

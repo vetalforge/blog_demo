@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Core\Database;
 
 class QueryBuilder
 {
@@ -190,7 +190,7 @@ class QueryBuilder
                 : true;
 
         } catch (\PDOException $e) {
-            throw new Exception("DB Error: " . $e->getMessage());
+            throw new \Exception("DB Error: " . $e->getMessage());
         }
     }
 }

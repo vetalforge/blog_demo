@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\QueryBuilder;
+use App\Core\Database\QueryBuilder;
 
 class HomePageService
 {
