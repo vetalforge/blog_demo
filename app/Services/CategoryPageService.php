@@ -6,7 +6,7 @@ use App\Core\Database\QueryBuilder;
 
 class CategoryPageService
 {
-    private const POSTS_PER_PAGE = 6;
+    private const POSTS_PER_PAGE = 3;
 
     public function __construct(
         private QueryBuilder $query

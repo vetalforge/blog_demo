@@ -93,7 +93,7 @@
 <header>
     <div class="container">
         <h1>
-            <a href="/">
+            <a href="{$baseUrl}/">
                 {$siteName}
             </a>
         </h1>

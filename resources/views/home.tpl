@@ -16,7 +16,7 @@
                         <img src="{$post.image}" alt="{$post.title}">
 
                         <h3>
-                            <a href="/post/{$post.id}">
+                            <a href="{$baseUrl}/post/{$post.id}">
                                 {$post.title}
                             </a>
                         </h3>
@@ -34,7 +34,7 @@
 
             </div>
 
-            <a class="btn" href="/category/{$category.id}">
+            <a class="btn" href="{$baseUrl}/category/{$category.id}">
                 Все статьи
             </a>
 

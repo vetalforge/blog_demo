@@ -18,8 +18,9 @@ try {
     if (!empty($actionData)) {
         $controller = $container->get($actionData['controller']);
         $action = $actionData['action'];
+        $params = $actionData['params'] ?? [];
 
-        $controller->$action();
+        $controller->$action(...array_values($params));
     } else {
         include '../resources/views/errors/404.php';
     }

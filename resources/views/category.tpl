@@ -40,7 +40,7 @@
                 <img src="{$post.image}" alt="{$post.title}">
 
                 <h3>
-                    <a href="/post/{$post.id}">
+                    <a href="{$baseUrl}/post/{$post.id}">
                         {$post.title}
                     </a>
                 </h3>

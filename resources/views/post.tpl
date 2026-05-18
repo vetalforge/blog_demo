@@ -33,7 +33,7 @@
 
             {foreach $post.categories as $category}
                 <li>
-                    <a href="/category/{$category.id}">
+                    <a href="{$baseUrl}/category/{$category.id}">
                         {$category.name}
                     </a>
                 </li>
@@ -51,7 +51,7 @@
                 <img src="{$related.image}" alt="{$related.title}">
 
                 <h3>
-                    <a href="/post/{$related.id}">
+                    <a href="{$baseUrl}/post/{$related.id}">
                         {$related.title}
                     </a>
                 </h3>

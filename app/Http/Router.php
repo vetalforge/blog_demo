@@ -13,6 +13,27 @@ class Router
 
     public function getActionData($uri)
     {
-        return array_key_exists($uri, $this->routes) ? $this->routes[$uri] : [];
+        $path = parse_url($uri, PHP_URL_PATH) ?: '/';
+
+        foreach ($this->routes as $route => $actionData) {
+            $pattern = preg_replace('#\{([a-zA-Z_][a-zA-Z0-9_]*)\}#', '(?P<$1>[^/]+)', $route);
+            $pattern = '#^' . $pattern . '$#';
+
+            if (preg_match($pattern, $path, $matches)) {
+                $params = [];
+
+                foreach ($matches as $key => $value) {
+                    if (!is_int($key)) {
+                        $params[$key] = ctype_digit($value) ? (int) $value : $value;
+                    }
+                }
+
+                $actionData['params'] = $params;
+
+                return $actionData;
+            }
+        }
+
+        return [];
     }
 }
