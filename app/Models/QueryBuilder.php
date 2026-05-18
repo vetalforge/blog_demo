@@ -15,7 +15,7 @@ class QueryBuilder
     protected ?string $rawSql = null;
     protected array $rawBindings = [];
 
-    public function __construct(\PDO $pdo, string $table)
+    public function __construct(\PDO $pdo, string $table = '')
     {
         $this->pdo = $pdo;
         $this->table = $table;

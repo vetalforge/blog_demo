@@ -23,7 +23,7 @@
         header {
             background: #222;
             color: white;
-            padding: 20px 0;
+            padding: 0;
             margin-bottom: 30px;
         }
 
@@ -83,6 +83,7 @@
             margin-top: 40px;
             padding: 20px 0;
             text-align: center;
+            background: #222;
             color: #777;
         }
     </style>

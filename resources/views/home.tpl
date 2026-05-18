@@ -1,7 +1,6 @@
 {extends file="layouts/layout.tpl"}
 
 {block name="content"}
-    <h2>Главная страница</h2>
     {foreach $categories as $category}
         <div class="category-block">
 

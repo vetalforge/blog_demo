@@ -4,11 +4,11 @@ use App\Http\Request;
 use App\Http\Session;
 use App\Controllers\MainPageController;
 use App\Http\Router;
-use App\Models\PDOAdapter;
 use App\Models\PDOConnection;
 use App\Views\TemplateEngine;
-use App\Models\User;
+use App\Models\QueryBuilder;
 use Smarty\Smarty;
+use App\Services\HomePageService;
 
 return [
     Router::class => function ($container) {
@@ -32,15 +32,20 @@ return [
 
         return $proxy::getInstance('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=UTF8', DB_USER, DB_PASS);
     },
-    User::class => function ($container) {
-        return new User($container->get(PDOConnection::class));
+    QueryBuilder::class => function ($container) {
+        return new QueryBuilder(
+            $container->get(PDOConnection::class)
+        );
+    },
+    HomePageService::class => function ($container) {
+        return new HomePageService($container->get(QueryBuilder::class));
     },
     MainPageController::class => function ($container) {
         return new MainPageController(
             $container->get(Request::class),
             $container->get(Session::class),
             $container->get(Smarty::class),
-            $container->get(User::class)
+            $container->get(HomePageService::class)
         );
     },
     TemplateEngine::class => function ($container) {
