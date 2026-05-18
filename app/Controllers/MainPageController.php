@@ -11,8 +11,8 @@ class MainPageController extends Controller
     public function __construct(
         Request $request,
         Session $session,
-        private User $user,
-        private Smarty $templateEngine
+        private Smarty $templateEngine,
+        private User $user
     ) {
         parent::__construct($request, $session);
     }
@@ -21,9 +21,9 @@ class MainPageController extends Controller
     {
         $this->templateEngine->assign('siteName', 'Blog Sample');
         $this->templateEngine->assign('pageTitle', 'Home');
-
         $this->templateEngine->display('home.tpl');
 
-        $this->user->all();
+        $users = $this->user->query()->get();
+        print_r($users);
     }
 }

@@ -32,18 +32,15 @@ return [
 
         return $proxy::getInstance('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=UTF8', DB_USER, DB_PASS);
     },
-    PDOAdapter::class => function ($container) {
-        return new PDOAdapter($container->get(PDOConnection::class));
-    },
     User::class => function ($container) {
-        return new User($container->get(PDOAdapter::class));
+        return new User($container->get(PDOConnection::class));
     },
     MainPageController::class => function ($container) {
         return new MainPageController(
             $container->get(Request::class),
             $container->get(Session::class),
-            $container->get(User::class),
             $container->get(Smarty::class),
+            $container->get(User::class)
         );
     },
     TemplateEngine::class => function ($container) {

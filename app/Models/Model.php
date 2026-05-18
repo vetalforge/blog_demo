@@ -4,62 +4,16 @@ namespace App\Models;
 
 abstract class Model
 {
-    /**
-     * @var string
-     */
-    protected $table;
+    protected \PDO $pdo;
+    protected string $table;
 
-    /**
-     * @var DatabaseAdapterInterface
-     */
-    protected $connector;
-
-
-    public function __construct(DatabaseAdapterInterface $connector)
+    public function __construct(\PDO $pdo)
     {
-        $this->connector = $connector;
-
-        if (isset($this->table)) {
-            $this->connector->setTable($this->table);
-        } else {
-            throw new \Exception('Model table is not set');
-        }
+        $this->pdo = $pdo;
     }
 
-    public function create(Array $data)
+    public function query(): QueryBuilder
     {
-        foreach ($data as $key => $value) {
-            if (empty($value)) {
-                unset($data[$key]);
-            }
-        }
-
-        $this->connector->insertRecord($data);
-    }
-
-    public function findOne($column, $value)
-    {
-        return $this->connector->selectRecord($column, $value);
-    }
-
-    public function all()
-    {
-        return $this->connector->selectAllRecords();
-    }
-
-    public function edit($data, $column, $id)
-    {
-        foreach ($data as $key => $value) {
-            if (empty($value)) {
-                unset($data[$key]);
-            }
-        }
-
-        $this->connector->updateRecord($data, $column, $id);
-    }
-
-    public function delete($column, $value)
-    {
-        $this->connector->deleteRecord($column, $value);
+        return new QueryBuilder($this->pdo, $this->table);
     }
 }
