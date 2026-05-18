@@ -1,12 +1,16 @@
 <?php
 
 use App\Controllers\MainPageController;
+use App\Controllers\CategoryController;
+use App\Controllers\PostController;
 use App\Core\Database\QueryBuilder;
 use App\Http\Request;
 use App\Http\Router;
 use App\Http\Session;
 use App\Models\PDOConnection;
+use App\Services\CategoryPageService;
 use App\Services\HomePageService;
+use App\Services\PostPageService;
 use App\Views\TemplateEngine;
 use Smarty\Smarty;
 
@@ -25,6 +29,7 @@ return [
         $smarty->setTemplateDir(APPLICATION . '/resources/views/');
         $smarty->setCompileDir(APPLICATION . '/storage/smarty/');
         $smarty->escape_html = true;
+        $smarty->assign('baseUrl', DOMAIN_SYM ? '' : DOMAIN_ADDITION);
         return $smarty;
     },
     PDOConnection::class => function ($container) {
@@ -40,12 +45,34 @@ return [
     HomePageService::class => function ($container) {
         return new HomePageService($container->get(QueryBuilder::class));
     },
+    CategoryPageService::class => function ($container) {
+        return new CategoryPageService($container->get(QueryBuilder::class));
+    },
+    PostPageService::class => function ($container) {
+        return new PostPageService($container->get(QueryBuilder::class));
+    },
     MainPageController::class => function ($container) {
         return new MainPageController(
             $container->get(Request::class),
             $container->get(Session::class),
             $container->get(Smarty::class),
             $container->get(HomePageService::class)
+        );
+    },
+    CategoryController::class => function ($container) {
+        return new CategoryController(
+            $container->get(Request::class),
+            $container->get(Session::class),
+            $container->get(Smarty::class),
+            $container->get(CategoryPageService::class)
+        );
+    },
+    PostController::class => function ($container) {
+        return new PostController(
+            $container->get(Request::class),
+            $container->get(Session::class),
+            $container->get(Smarty::class),
+            $container->get(PostPageService::class)
         );
     },
     TemplateEngine::class => function ($container) {
