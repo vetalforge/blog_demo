@@ -6,16 +6,12 @@ class QueryBuilder
 {
     protected \PDO $pdo;
     protected string $table;
-
     protected string $select = '*';
-
     protected array $where = [];
     protected array $bindings = [];
-
     protected ?string $orderBy = null;
     protected ?int $limit = null;
     protected ?int $offset = null;
-
     protected ?string $rawSql = null;
     protected array $rawBindings = [];
 
@@ -196,22 +192,5 @@ class QueryBuilder
         } catch (\PDOException $e) {
             throw new Exception("DB Error: " . $e->getMessage());
         }
-    }
-
-    /**
-     * Reset builder state (optional but useful)
-     */
-    public function reset(): self
-    {
-        $this->select = '*';
-        $this->where = [];
-        $this->bindings = [];
-        $this->orderBy = null;
-        $this->limit = null;
-        $this->offset = null;
-        $this->rawSql = null;
-        $this->rawBindings = [];
-
-        return $this;
     }
 }
