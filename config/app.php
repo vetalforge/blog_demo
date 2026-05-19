@@ -1,23 +1,11 @@
 <?php
 
-if (!function_exists('env_value')) {
-    function env_value(string $key, mixed $default = null): mixed
-    {
-        $value = getenv($key);
+require_once __DIR__ . '/env_helper.php';
 
-        return $value === false ? $default : $value;
-    }
-}
+$appPath = env_value('APP_PATH', dirname(__DIR__));
+$appPath = rtrim($appPath, '/\\') . DIRECTORY_SEPARATOR;
 
-if (!function_exists('env_bool')) {
-    function env_bool(string $key, bool $default = false): bool
-    {
-        return filter_var(env_value($key, $default), FILTER_VALIDATE_BOOLEAN);
-    }
-}
-
-define('APPLICATION', rtrim(env_value('APP_PATH', dirname(__DIR__)), '/\\') . DIRECTORY_SEPARATOR);
-
+define('APPLICATION', $appPath);
 define('HOST', env_value('APP_HOST', 'http://localhost'));
 define('DOMAIN_SYM', env_bool('APP_DOMAIN_SYM', false));
 define('DOMAIN_ADDITION', env_value('APP_DOMAIN_ADDITION', '/blog_demo'));
