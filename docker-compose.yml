@@ -1,0 +1,43 @@
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "8080:80"
+    environment:
+      APP_PATH: /var/www/html
+      APP_HOST: http://localhost:8080
+      APP_DOMAIN_SYM: "true"
+      APP_DOMAIN_ADDITION: ""
+      DB_HOST: db
+      DB_USER: blog_user
+      DB_PASS: blog_password
+      DB_NAME: blog_demo
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8.0
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: blog_demo
+      MYSQL_USER: blog_user
+      MYSQL_PASSWORD: blog_password
+      MYSQL_ROOT_PASSWORD: root_password
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/create_tables.sql:/docker-entrypoint-initdb.d/01_create_tables.sql:ro
+      - ./database/create_users.sql:/docker-entrypoint-initdb.d/02_create_users.sql:ro
+      - ./database/create_categories.sql:/docker-entrypoint-initdb.d/03_create_categories.sql:ro
+      - ./database/create_posts.sql:/docker-entrypoint-initdb.d/04_create_posts.sql:ro
+      - ./database/create_post_categories.sql:/docker-entrypoint-initdb.d/05_create_post_categories.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-P", "3306", "-u", "root", "-proot_password"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  db_data:
