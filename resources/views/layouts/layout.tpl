@@ -8,22 +8,25 @@
 
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
             margin: 0;
-            background: #f5f5f5;
-            color: #222;
+            background: #ffffff;
+            color: #38424a;
+            font-size: 14px;
+            line-height: 1.6;
         }
 
         .container {
-            width: 1100px;
+            width: 1010px;
+            max-width: calc(100% - 48px);
             margin: 0 auto;
-            padding: 20px;
+            padding: 0;
         }
 
         header {
-            background: #222;
+            background: #27596a;
             color: white;
-            padding: 0;
+            padding: 15px 0;
             margin-bottom: 30px;
         }
 
@@ -32,41 +35,107 @@
             text-decoration: none;
         }
 
+        header .container {
+            height: 38px;
+            display: flex;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 0;
+        }
+
+        main.container {
+            min-height: calc(100vh - 220px);
+        }
+
         .category-block,
-        .post-card,
         .post-page {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
+            background: #ffffff;
+            margin-bottom: 50px;
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 24px;
+            margin-bottom: 15px;
+        }
+
+        .category-header h2,
+        .category-block h1 {
+            margin: 0;
+            color: #1f2f38;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .category-description {
+            max-width: 620px;
+            margin: -8px 0 15px;
+            color: #7b8790;
+            font-size: 13px;
         }
 
         .post-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 22px;
+            align-items: start;
+        }
+
+        .post-card {
+            min-width: 0;
         }
 
         .post-card img {
             width: 100%;
-            height: 200px;
+            aspect-ratio: 1.58 / 1;
+            height: auto;
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 5px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .post-card h3 {
+            margin: 0 0 7px;
+            color: #3f4d56;
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        .post-card h3 a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .post-card p {
+            margin: 0 0 7px;
+            color: #7c8790;
+            font-size: 12px;
+            line-height: 1.55;
         }
 
         .btn {
-            display: inline-block;
-            padding: 10px 16px;
-            background: #222;
-            color: white;
+            color: #27596a;
             text-decoration: none;
-            border-radius: 6px;
-            margin-top: 10px;
+            border-bottom: 1px solid currentColor;
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 1.2;
         }
 
         .meta {
-            color: #777;
-            font-size: 14px;
+            color: #9aa4aa;
+            font-size: 11px;
             margin-bottom: 10px;
         }
 
@@ -80,11 +149,33 @@
         }
 
         footer {
-            margin-top: 40px;
+            margin-top: 70px;
             padding: 20px 0;
             text-align: center;
-            background: #222;
-            color: #777;
+            background: #27596a;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        @media (max-width: 760px) {
+            .container {
+                max-width: calc(100% - 32px);
+            }
+
+            header {
+                margin-bottom: 32px;
+            }
+
+            .category-block,
+            .post-page {
+                margin-bottom: 58px;
+            }
+
+            .post-grid {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
         }
     </style>
 </head>

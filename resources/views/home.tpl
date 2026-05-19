@@ -2,16 +2,24 @@
 
 {block name="content"}
     {foreach $categories as $category}
-        <div class="category-block">
+        <section class="category-block">
 
-            <h2>{$category.name}</h2>
+            <div class="category-header">
+                <h2>{$category.name}</h2>
 
-            <p>{$category.description}</p>
+                <a class="btn" href="{$baseUrl}/category/{$category.id}">
+                    View All
+                </a>
+            </div>
+
+            {if $category.description}
+                <p class="category-description">{$category.description}</p>
+            {/if}
 
             <div class="post-grid">
 
                 {foreach $category.posts as $post}
-                    <div class="post-card">
+                    <article class="post-card">
 
                         <img src="{$post.image}" alt="{$post.title}">
 
@@ -22,23 +30,23 @@
                         </h3>
 
                         <div class="meta">
-                            Просмотров: {$post.views}
+                            {$post.published_at|date_format:"%B %e, %Y"}
                         </div>
 
                         <p>
                             {$post.description|truncate:120}
                         </p>
 
-                    </div>
+                        <a class="btn" href="{$baseUrl}/post/{$post.id}">
+                            Continue Reading
+                        </a>
+
+                    </article>
                 {/foreach}
 
             </div>
 
-            <a class="btn" href="{$baseUrl}/category/{$category.id}">
-                Все статьи
-            </a>
-
-        </div>
+        </section>
     {/foreach}
 
 {/block}
