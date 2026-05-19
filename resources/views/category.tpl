@@ -37,7 +37,7 @@
         {foreach $posts as $post}
             <div class="post-card">
 
-                <img src="{$baseUrl}/{$post.image}" alt="{$post.title}">
+                <img src="{$post.image}" alt="{$post.title}">
 
                 <h3>
                     <a href="{$baseUrl}/post/{$post.id}">
