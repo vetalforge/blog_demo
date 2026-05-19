@@ -4,7 +4,6 @@ use App\Controllers\MainPageController;
 use App\Controllers\CategoryController;
 use App\Controllers\PostController;
 use App\Core\Database\DbConnection;
-use App\Core\Database\QueryBuilder;
 use App\Http\Request;
 use App\Http\Router;
 use App\Http\Session;
@@ -14,7 +13,10 @@ use App\Models\Post;
 use App\Services\CategoryPageService;
 use App\Services\HomePageService;
 use App\Services\PostPageService;
+use App\Views\NativeTemplateRenderer;
+use App\Views\SmartyRenderer;
 use App\Views\TemplateEngine;
+use App\Views\ViewRendererInterface;
 use Smarty\Smarty;
 
 return [
@@ -51,7 +53,7 @@ return [
         return new PostPageService($container->get(Post::class));
     },
     TemplateEngine::class => function ($container) {
-        return new TemplateEngine();
+        return new TemplateEngine(APPLICATION . '/resources/views/');
     },
     Smarty::class => function ($container) {
         $smarty = new Smarty();
@@ -61,11 +63,20 @@ return [
         $smarty->assign('baseUrl', DOMAIN_SYM ? '' : DOMAIN_ADDITION);
         return $smarty;
     },
+    SmartyRenderer::class => function ($container) {
+        return new SmartyRenderer($container->get(Smarty::class));
+    },
+    NativeTemplateRenderer::class => function ($container) {
+        return new NativeTemplateRenderer($container->get(TemplateEngine::class));
+    },
+    ViewRendererInterface::class => function ($container) {
+        return $container->get(SmartyRenderer::class);
+    },
     MainPageController::class => function ($container) {
         return new MainPageController(
             $container->get(Request::class),
             $container->get(Session::class),
-            $container->get(Smarty::class),
+            $container->get(ViewRendererInterface::class),
             $container->get(HomePageService::class)
         );
     },
@@ -73,7 +84,7 @@ return [
         return new CategoryController(
             $container->get(Request::class),
             $container->get(Session::class),
-            $container->get(Smarty::class),
+            $container->get(ViewRendererInterface::class),
             $container->get(CategoryPageService::class)
         );
     },
@@ -81,7 +92,7 @@ return [
         return new PostController(
             $container->get(Request::class),
             $container->get(Session::class),
-            $container->get(Smarty::class),
+            $container->get(ViewRendererInterface::class),
             $container->get(PostPageService::class)
         );
     },

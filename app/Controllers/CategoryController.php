@@ -4,14 +4,14 @@ namespace App\Controllers;
 
 use App\Http\{Request, Session};
 use App\Services\CategoryPageService;
-use Smarty\Smarty;
+use App\Views\ViewRendererInterface;
 
 class CategoryController extends Controller
 {
     public function __construct(
         Request $request,
         Session $session,
-        private Smarty $templateEngine,
+        private ViewRendererInterface $view,
         private CategoryPageService $categoryPageService
     ) {
         parent::__construct($request, $session);
@@ -31,7 +31,7 @@ class CategoryController extends Controller
             return;
         }
 
-        $this->templateEngine->assign([
+        $this->view->render('category.tpl', [
             'siteName' => 'Blog demo',
             'pageTitle' => $pageData['category']['name'],
             'category' => $pageData['category'],
@@ -39,7 +39,5 @@ class CategoryController extends Controller
             'sort' => $pageData['sort'],
             'pagination' => $pageData['pagination'],
         ]);
-
-        $this->templateEngine->display('category.tpl');
     }
 }
