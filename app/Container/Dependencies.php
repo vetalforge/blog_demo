@@ -3,6 +3,7 @@
 use App\Controllers\MainPageController;
 use App\Controllers\CategoryController;
 use App\Controllers\PostController;
+use App\Core\Database\DatabaseSeeder;
 use App\Core\Database\DbConnection;
 use App\Http\Request;
 use App\Http\Router;
@@ -95,5 +96,8 @@ return [
             $container->get(ViewRendererInterface::class),
             $container->get(PostPageService::class)
         );
+    },
+    DatabaseSeeder::class => function ($container) {
+        return new DatabaseSeeder($container->get(PDOConnection::class));
     },
 ];
