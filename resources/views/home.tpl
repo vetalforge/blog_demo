@@ -21,7 +21,7 @@
                 {foreach $category.posts as $post}
                     <article class="post-card">
 
-                        <img src="{$post.image}" alt="{$post.title}">
+                        <img src="{$baseUrl}/{$post.image}" alt="{$post.title}">
 
                         <h3>
                             <a href="{$baseUrl}/post/{$post.id}">

@@ -12,7 +12,7 @@
         </div>
 
         <img
-                src="{$post.image}"
+                src="{$baseUrl}/{$post.image}"
                 alt="{$post.title}"
                 style="width:100%; max-height:500px; object-fit:cover; border-radius:10px;"
         >
@@ -48,7 +48,7 @@
         {foreach $relatedPosts as $related}
             <div class="post-card">
 
-                <img src="{$related.image}" alt="{$related.title}">
+                <img src="{$baseUrl}/{$related.image}" alt="{$related.title}">
 
                 <h3>
                     <a href="{$baseUrl}/post/{$related.id}">
