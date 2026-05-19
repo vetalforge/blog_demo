@@ -3,11 +3,13 @@
 use App\Controllers\MainPageController;
 use App\Controllers\CategoryController;
 use App\Controllers\PostController;
+use App\Core\Database\DbConnection;
 use App\Core\Database\QueryBuilder;
 use App\Http\Request;
 use App\Http\Router;
 use App\Http\Session;
 use App\Models\PDOConnection;
+use App\Models\Post;
 use App\Services\CategoryPageService;
 use App\Services\HomePageService;
 use App\Services\PostPageService;
@@ -38,9 +40,13 @@ return [
         return $proxy::getInstance('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=UTF8', DB_USER, DB_PASS);
     },
     QueryBuilder::class => function ($container) {
-        return new QueryBuilder(
-            $container->get(PDOConnection::class)
-        );
+        return new QueryBuilder($container->get(PDOConnection::class));
+    },
+    DbConnection::class => function ($container) {
+        return new DbConnection($container->get(PDOConnection::class));
+    },
+    Post::class => function ($container) {
+        return new Post($container->get(DbConnection::class));
     },
     HomePageService::class => function ($container) {
         return new HomePageService($container->get(QueryBuilder::class));
@@ -49,7 +55,7 @@ return [
         return new CategoryPageService($container->get(QueryBuilder::class));
     },
     PostPageService::class => function ($container) {
-        return new PostPageService($container->get(QueryBuilder::class));
+        return new PostPageService($container->get(Post::class));
     },
     MainPageController::class => function ($container) {
         return new MainPageController(
