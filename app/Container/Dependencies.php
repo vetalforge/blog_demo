@@ -8,6 +8,7 @@ use App\Core\Database\QueryBuilder;
 use App\Http\Request;
 use App\Http\Router;
 use App\Http\Session;
+use App\Models\Category;
 use App\Models\PDOConnection;
 use App\Models\Post;
 use App\Services\CategoryPageService;
@@ -48,11 +49,14 @@ return [
     Post::class => function ($container) {
         return new Post($container->get(DbConnection::class));
     },
+    Category::class => function ($container) {
+        return new Category($container->get(DbConnection::class));
+    },
     HomePageService::class => function ($container) {
-        return new HomePageService($container->get(QueryBuilder::class));
+        return new HomePageService($container->get(Category::class));
     },
     CategoryPageService::class => function ($container) {
-        return new CategoryPageService($container->get(QueryBuilder::class));
+        return new CategoryPageService($container->get(Category::class));
     },
     PostPageService::class => function ($container) {
         return new PostPageService($container->get(Post::class));
