@@ -27,21 +27,10 @@ return [
     Session::class => function ($container) {
         return new Session();
     },
-    Smarty::class => function ($container) {
-        $smarty = new Smarty();
-        $smarty->setTemplateDir(APPLICATION . '/resources/views/');
-        $smarty->setCompileDir(APPLICATION . '/storage/smarty/');
-        $smarty->escape_html = true;
-        $smarty->assign('baseUrl', DOMAIN_SYM ? '' : DOMAIN_ADDITION);
-        return $smarty;
-    },
     PDOConnection::class => function ($container) {
         $proxy = new PDOConnection();
 
         return $proxy::getInstance('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=UTF8', DB_USER, DB_PASS);
-    },
-    QueryBuilder::class => function ($container) {
-        return new QueryBuilder($container->get(PDOConnection::class));
     },
     DbConnection::class => function ($container) {
         return new DbConnection($container->get(PDOConnection::class));
@@ -60,6 +49,17 @@ return [
     },
     PostPageService::class => function ($container) {
         return new PostPageService($container->get(Post::class));
+    },
+    TemplateEngine::class => function ($container) {
+        return new TemplateEngine();
+    },
+    Smarty::class => function ($container) {
+        $smarty = new Smarty();
+        $smarty->setTemplateDir(APPLICATION . '/resources/views/');
+        $smarty->setCompileDir(APPLICATION . '/storage/smarty/');
+        $smarty->escape_html = true;
+        $smarty->assign('baseUrl', DOMAIN_SYM ? '' : DOMAIN_ADDITION);
+        return $smarty;
     },
     MainPageController::class => function ($container) {
         return new MainPageController(
@@ -84,8 +84,5 @@ return [
             $container->get(Smarty::class),
             $container->get(PostPageService::class)
         );
-    },
-    TemplateEngine::class => function ($container) {
-        return new TemplateEngine();
     },
 ];
