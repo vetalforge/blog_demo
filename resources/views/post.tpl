@@ -14,7 +14,7 @@
         <img
                 src="{$post.image}"
                 alt="{$post.title}"
-                style="width:100%; max-height:500px; object-fit:cover; border-radius:10px;"
+                class="post-image"
         >
 
         <p>
